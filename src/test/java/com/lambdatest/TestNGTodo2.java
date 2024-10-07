@@ -3,10 +3,14 @@ package com.lambdatest;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
@@ -20,9 +24,10 @@ public class TestNGTodo2 {
 
     @BeforeMethod
     public void setup(Method m, ITestContext ctx) throws MalformedURLException {
-        String username = System.getenv("LT_USERNAME") == null ? "Your LT Username" : System.getenv("LT_USERNAME");
-        String authkey = System.getenv("LT_ACCESS_KEY") == null ? "Your LT AccessKey" : System.getenv("LT_ACCESS_KEY");
-        ;
+//        String username = System.getenv("LT_USERNAME") == null ? "Your LT Username" : System.getenv("LT_USERNAME");
+//        String authkey = System.getenv("LT_ACCESS_KEY") == null ? "Your LT AccessKey" : System.getenv("LT_ACCESS_KEY");
+        String username="belalahmad";
+        String authkey="cousQqH3syuMR3H55LiQfG4QqCyPHRsZs3XJ3mbEle94hOdYLj";
         
         /*
         Steps to run Smart UI project (https://beta-smartui.lambdatest.com/)
@@ -41,11 +46,10 @@ public class TestNGTodo2 {
         caps.setCapability("build", "TestNG With Java");
         caps.setCapability("name", m.getName() + this.getClass().getName());
         caps.setCapability("plugin", "git-testng");
+//        caps.setCapability("fixedIP","10.100.53.52"); //Not play
+        caps.setCapability("fixedIP","10.100.52.134");
 
-        /*
-        Enable Smart UI Project
-        caps.setCapability("smartUI.project", "<Project Name>");
-        */
+
 
         String[] Tags = new String[] { "Feature", "Magicleap", "Severe" };
         caps.setCapability("tags", Tags);
@@ -58,53 +62,78 @@ public class TestNGTodo2 {
         String spanText;
         System.out.println("Loading Url");
 
-        driver.get("https://lambdatest.github.io/sample-todo-app/");
+        driver.get("https://gateway.on24.com/wcc/eh/3706492/lp/3707138/");
+        Thread.sleep(2000);
+        driver.manage().window().maximize();
 
-        System.out.println("Checking Box");
-        driver.findElement(By.name("li1")).click();
 
-        System.out.println("Checking Another Box");
-        driver.findElement(By.name("li2")).click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement iframeElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("iframe#vjs_video_3_youtube_api")));
+        Thread.sleep(2000);
 
-        System.out.println("Checking Box");
-        driver.findElement(By.name("li3")).click();
+        // Switch to the iframe containing the YouTube video
+        driver.switchTo().frame(iframeElement);
 
-        System.out.println("Checking Another Box");
-        driver.findElement(By.name("li4")).click();
+        // Locate the YouTube play button and click it
+        WebElement playButton = driver.findElement(By.cssSelector("button.ytp-large-play-button"));
+        playButton.click();
+        Thread.sleep(5000);
 
-        driver.findElement(By.id("sampletodotext")).sendKeys(" List Item 6");
-        driver.findElement(By.id("addbutton")).click();
+        // Additional actions or verification code here
 
-        driver.findElement(By.id("sampletodotext")).sendKeys(" List Item 7");
-        driver.findElement(By.id("addbutton")).click();
+        // Switch back to the main content if needed
+        driver.switchTo().defaultContent();
 
-        driver.findElement(By.id("sampletodotext")).sendKeys(" List Item 8");
-        driver.findElement(By.id("addbutton")).click();
 
-        System.out.println("Checking Another Box");
-        driver.findElement(By.name("li1")).click();
 
-        System.out.println("Checking Another Box");
-        driver.findElement(By.name("li3")).click();
 
-        System.out.println("Checking Another Box");
-        driver.findElement(By.name("li7")).click();
 
-        System.out.println("Checking Another Box");
-        driver.findElement(By.name("li8")).click();
 
-        System.out.println("Entering Text");
-        driver.findElement(By.id("sampletodotext")).sendKeys("Get Taste of Lambda and Stick to It");
-
-        driver.findElement(By.id("addbutton")).click();
-
-        System.out.println("Checking Another Box");
-        driver.findElement(By.name("li9")).click();
+//        System.out.println("Checking Box");
+//        driver.findElement(By.name("li1")).click();
+//
+//        System.out.println("Checking Another Box");
+//        driver.findElement(By.name("li2")).click();
+//
+//        System.out.println("Checking Box");
+//        driver.findElement(By.name("li3")).click();
+//
+//        System.out.println("Checking Another Box");
+//        driver.findElement(By.name("li4")).click();
+//
+//        driver.findElement(By.id("sampletodotext")).sendKeys(" List Item 6");
+//        driver.findElement(By.id("addbutton")).click();
+//
+//        driver.findElement(By.id("sampletodotext")).sendKeys(" List Item 7");
+//        driver.findElement(By.id("addbutton")).click();
+//
+//        driver.findElement(By.id("sampletodotext")).sendKeys(" List Item 8");
+//        driver.findElement(By.id("addbutton")).click();
+//
+//        System.out.println("Checking Another Box");
+//        driver.findElement(By.name("li1")).click();
+//
+//        System.out.println("Checking Another Box");
+//        driver.findElement(By.name("li3")).click();
+//
+//        System.out.println("Checking Another Box");
+//        driver.findElement(By.name("li7")).click();
+//
+//        System.out.println("Checking Another Box");
+//        driver.findElement(By.name("li8")).click();
+//
+//        System.out.println("Entering Text");
+//        driver.findElement(By.id("sampletodotext")).sendKeys("Get Taste of Lambda and Stick to It");
+//
+//        driver.findElement(By.id("addbutton")).click();
+//
+//        System.out.println("Checking Another Box");
+//        driver.findElement(By.name("li9")).click();
 
         // Let's also assert that the todo we added is present in the list.
 
-        spanText = driver.findElementByXPath("/html/body/div/div/div/ul/li[9]/span").getText();
-        Assert.assertEquals("Get Taste of Lambda and Stick to It", spanText);
+//        spanText = driver.findElementByXPath("/html/body/div/div/div/ul/li[9]/span").getText();
+//        Assert.assertEquals("Get Taste of Lambda and Stick to It", spanText);
         Status = "passed";
         Thread.sleep(150);
 
